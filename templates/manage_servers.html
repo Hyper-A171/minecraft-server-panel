@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Servers</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f8;
+      color: #333;
+    }
+    .navbar {
+      background: #2c3e50;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .navbar .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 14px;
+    }
+    .navbar .nav-links a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #f0f2f5;
+    }
+    .status {
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 13px;
+      display: inline-block;
+    }
+    .running { background: #2ecc71; color: white; }
+    .inactive { background: #e74c3c; color: white; }
+    .buttons a {
+      text-decoration: none;
+      margin-right: 10px;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      color: white;
+      display: inline-block;
+    }
+    .start { background: #27ae60; }
+    .stop { background: #c0392b; }
+    .restart { background: #f39c12; }
+    .remove { background: #7f8c8d; }
+    .create-server {
+      display: inline-block;
+      margin-top: 20px;
+      background: #3498db;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .create-server:hover { background: #2980b9; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="title">Minecraft Server Panel</div>
+    <div class="nav-links">
+      <a href="{{ url_for('home') }}">🏠 Dashboard</a>
+      <a href="{{ url_for('create_server') }}">➕ Create Server</a>
+      <a href="{{ url_for('about') }}">ℹ️ About</a>
+      <a href="{{ url_for('logout') }}">🔓 Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Manage Servers</h2>
+    {% if servers %}
+    <table>
+      <thead>
+        <tr>
+          <th>Server Name</th>
+          <th>Port</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for server in servers %}
+        <tr>
+          <td>{{ server.name }}</td>
+          <td>{{ server.port }}</td>
+          <td>
+            <span class="status {% if server.status == 'active' %}running{% else %}inactive{% endif %}">
+              {% if server.status == 'active' %}Running{% else %}Stopped{% endif %}
+            </span>
+          </td>
+          <td class="buttons">
+            <a href="{{ url_for('action', service=server.service, action='start') }}" class="start">Start</a>
+            <a href="{{ url_for('action', service=server.service, action='stop') }}" class="stop">Stop</a>
+            <a href="{{ url_for('action', service=server.service, action='restart') }}" class="restart">Restart</a>
+            <a href="{{ url_for('remove_server', service=server.service) }}" class="remove">Remove</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p style="text-align: center; color: #777;">No servers found.</p>
+    {% endif %}
+
+    <a href="{{ url_for('create_server') }}" class="create-server">➕ Create New Server</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Minecraft Server</title>
+  <style>
+    body {
+      background: #eef1f5;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .navbar {
+      background: #3498db;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    .navbar .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .navbar .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: opacity 0.3s ease;
+    }
+    .navbar .nav-links a:hover {
+      opacity: 0.8;
+    }
+    .container {
+      max-width: 500px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 22px;
+      text-align: center;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    input[type="submit"] {
+      background: #3498db;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background: #2980b9;
+    }
+    a.back-link {
+      display: block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #3498db;
+      text-align: center;
+      font-size: 14px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    ul.messages {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    ul.messages li {
+      background: #fef5e7;
+      border-left: 4px solid #f39c12;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #b9770e;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="title">Minecraft Server Panel</div>
+    <div class="nav-links">
+      <a href="{{ url_for('home') }}">🏠 Home</a>
+      <a href="{{ url_for('logout') }}">⏻ Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Create New Server</h2>
+    <form method="post">
+      <label>Server Name</label>
+      <input type="text" name="server_name" required>    
+
+      <label>Port</label>
+      <input type="text" name="port" required>
+
+      <label>Game Mode</label>
+      <select name="gamemode">
+        <option value="survival">Survival</option>
+        <option value="creative">Creative</option>
+        <option value="adventure">Adventure</option>
+        <option value="spectator">Spectator</option>
+      </select>
+
+      <label>Edition</label>
+      <select name="edition">
+        <option value="java">Java Edition</option>
+        <option value="bedrock">Bedrock Edition</option>
+      </select>
+
+      <input type="submit" value="Create Server">
+    </form>
+
+    <a href="{{ url_for('manage_servers') }}" class="back-link">← Back to Manage Servers</a>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+</body>
+</html>

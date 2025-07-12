@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Minecraft Server Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+    .navbar {
+      background: #2c3e50;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    .navbar .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .navbar .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: opacity 0.3s ease;
+    }
+    .navbar .nav-links a:hover {
+      opacity: 0.8;
+    }
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+      color: #2c3e50;
+      font-size: 26px;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 40px;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      flex: 1 1 200px;
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="title">Minecraft Server Panel</div>
+    <div class="nav-links">
+      <a href="{{ url_for('home') }}">🏠 Dashboard</a>
+      <a href="{{ url_for('profile') }}">🙍‍♂️ Profile</a>
+      <a href="{{ url_for('about') }}">ℹ️ About</a>
+      <a href="{{ url_for('logout') }}">⏻ Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Welcome, {{ session.username }}!</h2>
+    <p>Manage your Minecraft servers easily. Select an action below.</p>
+
+    <div class="card-container">
+      <a href="{{ url_for('manage_servers') }}" class="card">
+        <div class="card-icon">🖥️</div>
+        <div class="card-title">Manage Servers</div>
+      </a>
+      <a href="{{ url_for('create_server') }}" class="card">
+        <div class="card-icon">➕</div>
+        <div class="card-title">Create New Server</div>
+      </a>
+      <a href="{{ url_for('profile') }}" class="card">
+        <div class="card-icon">👤</div>
+        <div class="card-title">View Profile</div>
+      </a>
+      <a href="{{ url_for('about') }}" class="card">
+        <div class="card-icon">ℹ️</div>
+        <div class="card-title">About</div>
+      </a>
+      <a href="{{ url_for('logout') }}" class="card">
+        <div class="card-icon">🔓</div>
+        <div class="card-title">Logout</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

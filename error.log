@@ -1,0 +1,6 @@
+[2025-07-12 09:21:27 +0000] [1327] [INFO] Starting gunicorn 23.0.0
+[2025-07-12 09:21:27 +0000] [1327] [INFO] Listening at: unix:/var/www/minecraft_webpanel/ipc.sock (1327)
+[2025-07-12 09:21:27 +0000] [1327] [INFO] Using worker: sync
+[2025-07-12 09:21:27 +0000] [1451] [INFO] Booting worker with pid: 1451
+[2025-07-12 09:21:27 +0000] [1462] [INFO] Booting worker with pid: 1462
+[2025-07-12 09:21:27 +0000] [1464] [INFO] Booting worker with pid: 1464
